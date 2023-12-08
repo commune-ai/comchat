@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import { COOKIE_NAME, MESSAGES_BEFORE_LOGIN } from "$env/static/private";
+=======
+import { dev } from "$app/environment";
+import { COOKIE_NAME } from "$env/static/private";
+import { PUBLIC_GOOGLE_ANALYTICS_ID } from "$env/static/public";
+>>>>>>> 0ea744577b8182485427f9194e5004fda4b81bf5
 import type { Handle } from "@sveltejs/kit";
 import {
 	PUBLIC_GOOGLE_ANALYTICS_ID,
@@ -137,5 +143,19 @@ export const handle: Handle = async ({ event, resolve }) => {
 		},
 	});
 
+<<<<<<< HEAD
+=======
+	let replaced = false;
+
+	const response = await resolve(event, {transformPageChunk: (chunk) => {
+		if ((replaced || !chunk.html.includes("%gaId%"))) {
+			return chunk.html;
+		}
+		replaced = true;
+
+		return chunk.html.replace("%gaId%", PUBLIC_GOOGLE_ANALYTICS_ID)}
+	});
+
+>>>>>>> 0ea744577b8182485427f9194e5004fda4b81bf5
 	return response;
 };
